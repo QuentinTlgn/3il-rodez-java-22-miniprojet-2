@@ -1,6 +1,7 @@
 package fr.ecole3il.rodez2023.carte.elements;
 
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Cette classe représente un nœud dans un graphe générique.
@@ -11,6 +12,11 @@ public class Noeud<E> {
     private E valeur;
     private List<Noeud<E>> voisins;
     
+    public Noeud(E valeur) {
+        this.valeur = valeur;
+        this.voisins = new ArrayList<>();
+    }
+
     /**
      * Obtient la valeur stockée dans le nœud.
      *
