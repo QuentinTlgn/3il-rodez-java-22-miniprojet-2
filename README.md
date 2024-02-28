@@ -6,3 +6,8 @@
 
 **Réponse :** Ici, j'utilise une matrice d'adjacence. Chaque élément de cette matrice contient le coût de l'arête entre les nœuds correspondants.
 Une autre solution aurait pu être d'utiliser une liste d'adjacence, où chaque noeud du graphe est associé à une liste de ses voisins directs, et éventuellement les coûts des arêtes.
+
+**Question :** Pourquoi pensez-vous que les classes `Noeud` et `Graphe` ont été définies avec des paramètres génériques ?
+
+**Réponse :** Cela permet de pouvoir définir plus tard le Type des noeuds. Pour une plus grande fléxibilité et adaptabilité.
+
