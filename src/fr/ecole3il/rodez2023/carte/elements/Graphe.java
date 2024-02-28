@@ -97,6 +97,7 @@ public class Graphe<E> {
         return noeud.getVoisins();
     }
 
+    //TODO Retirer la classe main lors de la fin des tests
     /**
      * Méthode principale pour tester le code du graphe.
      *
