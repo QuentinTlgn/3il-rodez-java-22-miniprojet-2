@@ -12,8 +12,6 @@ import fr.ecole3il.rodez2023.carte.manipulateurs.GenerateurCarte;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -27,12 +25,10 @@ import java.awt.image.BufferedImage;
  *         moi j'aime pas le java
  */
 public class CarteGUI extends JFrame {
-	private Carte carte;
+	private final Carte carte;
 	private Case caseDepart;
 	private Case caseArrivee;
 	private AlgorithmeChemin algorithme;
-
-	private AdaptateurAlgorithme adaptateurAlgorithme;
 
 	public CarteGUI(Carte carte) {
 
@@ -56,15 +52,12 @@ public class CarteGUI extends JFrame {
 		cartePanel.setPreferredSize(new Dimension(carte.getLargeur() * 32, carte.getHauteur() * 32));
 
 		JComboBox<String> algorithmeComboBox = new JComboBox<>(new String[] { "Dijkstra", "A*" });
-		algorithmeComboBox.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String choix = (String) algorithmeComboBox.getSelectedItem();
-				if (choix.equals("Dijkstra")) {
-					algorithme = new AlgorithmeDjikstra();
-				} else if (choix.equals("A*")) {
-					algorithme = new AlgorithmeAEtoile();
-				}
+		algorithmeComboBox.addActionListener(e -> {
+			String choix = (String) algorithmeComboBox.getSelectedItem();
+			if (choix.equals("Dijkstra")) {
+				algorithme = new AlgorithmeDjikstra();
+			} else if (choix.equals("A*")) {
+				algorithme = new AlgorithmeAEtoile();
 			}
 		});
 
@@ -114,8 +107,7 @@ public class CarteGUI extends JFrame {
 			}
 		}
 		if (caseDepart != null && caseArrivee != null) {
-			Chemin chemin = AdaptateurAlgorithme.trouverChemin(algorithme, carte, caseDepart.getX(), caseDepart.getY(),
-					caseArrivee.getX(), caseArrivee.getY());
+			Chemin chemin = AdaptateurAlgorithme.trouverChemin(algorithme, carte, caseDepart.getX(), caseDepart.getY(), caseArrivee.getX(), caseArrivee.getY());
 			g.setColor(Color.RED);
 			for (Case c : chemin.getCases()) {
 				g.fillRect(c.getX() * 32, c.getY() * 32, 32, 32);
@@ -158,10 +150,9 @@ public class CarteGUI extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		GenerateurCarte gen = new GenerateurCarte();
-		Carte carte = gen.genererCarte(30, 30);// new Carte(tuiles);
+		GenerateurCarte generation = new GenerateurCarte();
+		Carte carte = generation.genererCarte(30, 30);
 
-		// Créer et afficher l'interface graphique
 		SwingUtilities.invokeLater(() -> {
 			CarteGUI carteGUI = new CarteGUI(carte);
 			carteGUI.setVisible(true);
