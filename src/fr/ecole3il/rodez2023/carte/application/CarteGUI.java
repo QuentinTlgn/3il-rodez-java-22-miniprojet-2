@@ -32,6 +32,8 @@ public class CarteGUI extends JFrame {
 	private Case caseArrivee;
 	private AlgorithmeChemin algorithme;
 
+	private AdaptateurAlgorithme adaptateurAlgorithme;
+
 	public CarteGUI(Carte carte) {
 
 		this.carte = carte;
@@ -134,8 +136,6 @@ public class CarteGUI extends JFrame {
 	}
 
 	private BufferedImage getTuileImage(Tuile tuile) {
-		// Bon, j'ai pas eu le temps de faire les images
-		// mais ça marche
 		BufferedImage image = new BufferedImage(32, 32, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = image.createGraphics();
 		switch (tuile) {
@@ -158,9 +158,6 @@ public class CarteGUI extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		// Créer une carte de test
-		// J'ai mis ça en test
-		// Donc OKLM en commentaires
 		GenerateurCarte gen = new GenerateurCarte();
 		Carte carte = gen.genererCarte(30, 30);// new Carte(tuiles);
 
