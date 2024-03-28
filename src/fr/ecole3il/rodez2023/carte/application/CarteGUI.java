@@ -1,7 +1,13 @@
 package fr.ecole3il.rodez2023.carte.application;
 
+import fr.ecole3il.rodez2023.carte.AdaptateurAlgorithme;
+import fr.ecole3il.rodez2023.carte.chemin.algorithmes.AlgorithmeAEtoile;
 import fr.ecole3il.rodez2023.carte.chemin.algorithmes.AlgorithmeChemin;
-import fr.ecole3il.rodez2023.carte.elements.*;
+import fr.ecole3il.rodez2023.carte.chemin.algorithmes.AlgorithmeDjikstra;
+import fr.ecole3il.rodez2023.carte.elements.Carte;
+import fr.ecole3il.rodez2023.carte.elements.Case;
+import fr.ecole3il.rodez2023.carte.elements.Chemin;
+import fr.ecole3il.rodez2023.carte.elements.Tuile;
 import fr.ecole3il.rodez2023.carte.manipulateurs.GenerateurCarte;
 
 import javax.swing.*;
@@ -14,11 +20,11 @@ import java.awt.image.BufferedImage;
 
 /**
  * @author p.roquart
- * voilà
- * donc
- * c'est la classe finale pour le gui quoi
- * enfin je sais pas
- * moi j'aime pas le java
+ *         voilà
+ *         donc
+ *         c'est la classe finale pour le gui quoi
+ *         enfin je sais pas
+ *         moi j'aime pas le java
  */
 public class CarteGUI extends JFrame {
 	private Carte carte;
@@ -27,10 +33,11 @@ public class CarteGUI extends JFrame {
 	private AlgorithmeChemin algorithme;
 
 	public CarteGUI(Carte carte) {
+
 		this.carte = carte;
 		this.caseDepart = null;
 		this.caseArrivee = null;
-		this.algorithme = new AlgorithmeDijkstra(); // Algorithme par défaut
+		this.algorithme = new AlgorithmeDjikstra(); // Algorithme par défaut
 
 		setTitle("Carte");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,7 +59,7 @@ public class CarteGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String choix = (String) algorithmeComboBox.getSelectedItem();
 				if (choix.equals("Dijkstra")) {
-					algorithme = new AlgorithmeDijkstra();
+					algorithme = new AlgorithmeDjikstra();
 				} else if (choix.equals("A*")) {
 					algorithme = new AlgorithmeAEtoile();
 				}
@@ -104,10 +111,9 @@ public class CarteGUI extends JFrame {
 				}
 			}
 		}
-
 		if (caseDepart != null && caseArrivee != null) {
-			Chemin chemin = algorithme.trouverChemin(carte, caseDepart.getX(), caseDepart.getY(), caseArrivee.getX(),
-					caseArrivee.getY());
+			Chemin chemin = AdaptateurAlgorithme.trouverChemin(algorithme, carte, caseDepart.getX(), caseDepart.getY(),
+					caseArrivee.getX(), caseArrivee.getY());
 			g.setColor(Color.RED);
 			for (Case c : chemin.getCases()) {
 				g.fillRect(c.getX() * 32, c.getY() * 32, 32, 32);
@@ -117,12 +123,13 @@ public class CarteGUI extends JFrame {
 
 	private void trouverChemin() {
 		if (caseDepart != null && caseArrivee != null) {
-			Chemin chemin = algorithme.trouverChemin(carte, caseDepart.getX(), caseDepart.getY(), caseArrivee.getX(),
-					caseArrivee.getY());
+			Chemin chemin = AdaptateurAlgorithme.trouverChemin(algorithme, carte, caseDepart.getX(), caseDepart.getY(), caseArrivee.getX(), caseArrivee.getY());
 			System.out.println("Chemin le plus court :");
 			for (Case c : chemin.getCases()) {
 				System.out.println("[" + c.getX() + ", " + c.getY() + "]");
 			}
+
+			repaint(); // Mettre à jour l'affichage de la carte avec le nouveau chemin
 		}
 	}
 
@@ -132,18 +139,18 @@ public class CarteGUI extends JFrame {
 		BufferedImage image = new BufferedImage(32, 32, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = image.createGraphics();
 		switch (tuile) {
-		case DESERT:
-			g.setColor(Color.YELLOW);
-			break;
-		case MONTAGNES:
-			g.setColor(Color.GRAY);
-			break;
-		case PLAINE:
-			g.setColor(Color.GREEN);
-			break;
-		case FORET:
-			g.setColor(Color.DARK_GRAY);
-			break;
+			case DESERT:
+				g.setColor(Color.YELLOW);
+				break;
+			case MONTAGNES:
+				g.setColor(Color.GRAY);
+				break;
+			case PLAINE:
+				g.setColor(Color.GREEN);
+				break;
+			case FORET:
+				g.setColor(Color.DARK_GRAY);
+				break;
 		}
 		g.fillRect(0, 0, 32, 32);
 		g.dispose();
@@ -152,12 +159,10 @@ public class CarteGUI extends JFrame {
 
 	public static void main(String[] args) {
 		// Créer une carte de test
-		/*Tuile[][] tuiles = new Tuile[][] { { Tuile.DESERT, Tuile.MONTAGNES, Tuile.PLAINE },
-				{ Tuile.FORET, Tuile.DESERT, Tuile.PLAINE }, { Tuile.PLAINE, Tuile.MONTAGNES, Tuile.FORET } };*/
 		// J'ai mis ça en test
 		// Donc OKLM en commentaires
 		GenerateurCarte gen = new GenerateurCarte();
-		Carte carte = gen.genererCarte(10, 10);//new Carte(tuiles);
+		Carte carte = gen.genererCarte(30, 30);// new Carte(tuiles);
 
 		// Créer et afficher l'interface graphique
 		SwingUtilities.invokeLater(() -> {
