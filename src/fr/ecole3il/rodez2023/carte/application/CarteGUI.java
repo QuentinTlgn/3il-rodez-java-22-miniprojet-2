@@ -1,5 +1,17 @@
 package fr.ecole3il.rodez2023.carte.application;
 
+import fr.ecole3il.rodez2023.carte.chemin.algorithmes.AlgorithmeChemin;
+import fr.ecole3il.rodez2023.carte.elements.*;
+import fr.ecole3il.rodez2023.carte.manipulateurs.GenerateurCarte;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+
 /**
  * @author p.roquart
  * voilà
