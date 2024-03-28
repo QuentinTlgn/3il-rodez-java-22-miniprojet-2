@@ -7,7 +7,7 @@ import java.util.List;
  * Elle fournit des méthodes pour accéder aux cases du chemin et afficher le chemin.
  */
 public class Chemin {
-    private List<Case> cases; // Liste des cases composant le chemin
+    private final List<Case> cases; // Liste des cases composant le chemin
 
     /**
      * Construit un nouveau chemin avec la liste de cases spécifiée.

@@ -22,8 +22,10 @@ public class ExempleCLI {
 		GenerateurCarte generateur = new GenerateurCarte();
 		Carte test = generateur.genererCarte(100, 100);
 		AlgorithmeChemin<Case> algorithmeChemin = new AlgorithmeDjikstra<>();
+
 		Chemin chemin = AdaptateurAlgorithme.trouverChemin(algorithmeChemin, test, 0, 0, 50, 50);
 		chemin.afficherChemin();
+
 		chemin = AdaptateurAlgorithme.trouverChemin(algorithmeChemin, test, 0, 0, 50, 50);
 		chemin.afficherChemin();
 	}

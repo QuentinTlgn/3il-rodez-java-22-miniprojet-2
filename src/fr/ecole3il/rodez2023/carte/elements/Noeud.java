@@ -9,8 +9,8 @@ import java.util.ArrayList;
  * @param <E> Le type de la valeur stockée dans le nœud.
  */
 public class Noeud<E> {
-    private E valeur;
-    private List<Noeud<E>> voisins;
+    private final E valeur;
+    private final List<Noeud<E>> voisins;
     
     public Noeud(E valeur) {
         this.valeur = valeur;

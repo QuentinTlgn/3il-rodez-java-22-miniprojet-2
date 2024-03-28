@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import fr.ecole3il.rodez2023.carte.elements.Case;
-
 import java.util.HashMap;
 
 public class Graphe<E> {
 
-    private Map<Noeud<E>, Map<Noeud<E>, Double>> matriceAdj; // Matrice d'adjacence représentant les arêtes du graphe
-    private List<Noeud<E>> noeuds; // Liste des noeuds du graphe
+    private final Map<Noeud<E>, Map<Noeud<E>, Double>> matriceAdj; // Matrice d'adjacence représentant les arêtes du graphe
+    private final List<Noeud<E>> noeuds; // Liste des noeuds du graphe
 
     public Graphe() {
         this.matriceAdj = new HashMap<>();
@@ -53,21 +51,12 @@ public class Graphe<E> {
 
     public Noeud<E> getNoeud(int x, int y) {
         for (Noeud<E> noeud : noeuds) {
-            if (noeud.getValeur() instanceof Case) {
-                Case caseValue = (Case) noeud.getValeur();
+            if (noeud.getValeur() instanceof Case caseValue) {
                 if (caseValue.getX() == x && caseValue.getY() == y) {
                     return noeud;
                 }
             }
         }
         return null;
-    }
-
-    public int getPenalite(Noeud<E> noeud) {
-        if (noeud.getValeur() instanceof Case) {
-            Case caseValue = (Case) noeud.getValeur();
-            return caseValue.getTuile().getPenalite();
-        }
-        return 0;
     }
 }

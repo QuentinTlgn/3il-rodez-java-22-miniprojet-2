@@ -19,7 +19,7 @@ public class AlgorithmeAEtoile<E> implements AlgorithmeChemin<E> {
 
     @Override
     public List<Noeud<E>> trouverChemin(Graphe<E> graphe, Noeud<E> debut, Noeud<E> cible) {
-        // Initialisation des structures de données
+
         Map<Noeud<E>, Double> coutActuel = new HashMap<>();
         Map<Noeud<E>, Double> coutTotalEstime = new HashMap<>();
         Map<Noeud<E>, Noeud<E>> precedent = new HashMap<>();
@@ -32,6 +32,7 @@ public class AlgorithmeAEtoile<E> implements AlgorithmeChemin<E> {
             coutActuel.put(noeud, Double.POSITIVE_INFINITY);
             precedent.put(noeud, null);
         }
+
         coutActuel.put(debut, 0.0);
         coutTotalEstime.put(debut, heuristique(debut, cible));
         filePrioritaire.add(debut);
@@ -53,6 +54,7 @@ public class AlgorithmeAEtoile<E> implements AlgorithmeChemin<E> {
                     precedent.put(voisin, courant);
                     coutActuel.put(voisin, nouveauCout);
                     coutTotalEstime.put(voisin, coutActuel.get(voisin) + heuristique(voisin, cible));
+
                     if (!filePrioritaire.contains(voisin))
                         filePrioritaire.add(voisin);
                 }
@@ -69,6 +71,7 @@ public class AlgorithmeAEtoile<E> implements AlgorithmeChemin<E> {
     private LinkedList<Noeud<E>> reconstruireChemin(Map<Noeud<E>, Noeud<E>> predecesseur, Noeud<E> cible, Noeud<E> debut) {
         LinkedList<Noeud<E>> chemin = new LinkedList<>();
         Noeud<E> courant = cible;
+
         while (courant != null) {
             chemin.add(courant);
             courant = predecesseur.get(courant);
