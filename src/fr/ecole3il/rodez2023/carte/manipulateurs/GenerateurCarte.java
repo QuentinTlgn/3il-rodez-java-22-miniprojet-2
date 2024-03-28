@@ -12,6 +12,13 @@ import java.util.Random;
 import fr.ecole3il.rodez2023.carte.elements.Carte;
 import fr.ecole3il.rodez2023.carte.elements.Tuile;
 
+/**
+ * La classe GenerateurCarte est responsable de la génération de cartes en utilisant des tuiles aléatoires.
+ * Elle fournit des méthodes pour générer une carte aléatoire avec des dimensions spécifiées ou avec des dimensions par défaut,
+ * ainsi que pour afficher une carte donnée.
+ *
+ * @author proussille
+ */
 public class GenerateurCarte {
     private static final int LARGEUR_PAR_DEFAUT = 10; // Largeur par défaut de la carte
     private static final int HAUTEUR_PAR_DEFAUT = 10; // Hauteur par défaut de la carte

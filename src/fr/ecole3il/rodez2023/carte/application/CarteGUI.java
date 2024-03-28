@@ -17,12 +17,10 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 /**
+ * Cette classe représente une interface graphique permettant d'afficher une carte avec des cases et de trouver le chemin
+ * le plus court entre deux cases en utilisant différents algorithmes.
+ * Elle permet également de visualiser le chemin trouvé sur la carte.
  * @author p.roquart
- *         voilà
- *         donc
- *         c'est la classe finale pour le gui quoi
- *         enfin je sais pas
- *         moi j'aime pas le java
  */
 public class CarteGUI extends JFrame {
 	private final Carte carte;
@@ -30,6 +28,10 @@ public class CarteGUI extends JFrame {
 	private Case caseArrivee;
 	private AlgorithmeChemin algorithme;
 
+	/**
+	 * Construit une interface graphique pour afficher une carte et trouver le chemin le plus court entre deux cases.
+	 * @param carte La carte à afficher.
+	 */
 	public CarteGUI(Carte carte) {
 
 		this.carte = carte;
@@ -88,6 +90,10 @@ public class CarteGUI extends JFrame {
 		});
 	}
 
+	/**
+	 * Dessine la carte avec ses tuiles, les cases de départ et d'arrivée ainsi que le chemin trouvé.
+	 * @param g L'objet Graphics2D utilisé pour dessiner.
+	 */
 	private void dessinerCarte(Graphics2D g) {
 		for (int x = 0; x < carte.getLargeur(); x++) {
 			for (int y = 0; y < carte.getHauteur(); y++) {
@@ -115,6 +121,9 @@ public class CarteGUI extends JFrame {
 		}
 	}
 
+	/**
+	 * Détermine la case cliquée et lance la recherche du chemin si nécessaire.
+	 */
 	private void trouverChemin() {
 		if (caseDepart != null && caseArrivee != null) {
 			Chemin chemin = AdaptateurAlgorithme.trouverChemin(algorithme, carte, caseDepart.getX(), caseDepart.getY(), caseArrivee.getX(), caseArrivee.getY());
@@ -127,28 +136,31 @@ public class CarteGUI extends JFrame {
 		}
 	}
 
+	/**
+	 * Récupère l'image représentant une tuile spécifique.
+	 * @param tuile La tuile pour laquelle récupérer l'image.
+	 * @return L'image représentant la tuile.
+	 */
 	private BufferedImage getTuileImage(Tuile tuile) {
 		BufferedImage image = new BufferedImage(32, 32, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = image.createGraphics();
+
 		switch (tuile) {
-			case DESERT:
-				g.setColor(Color.YELLOW);
-				break;
-			case MONTAGNES:
-				g.setColor(Color.GRAY);
-				break;
-			case PLAINE:
-				g.setColor(Color.GREEN);
-				break;
-			case FORET:
-				g.setColor(Color.DARK_GRAY);
-				break;
+			case DESERT -> g.setColor(Color.YELLOW);
+			case MONTAGNES -> g.setColor(Color.GRAY);
+			case PLAINE -> g.setColor(Color.GREEN);
+			case FORET -> g.setColor(Color.DARK_GRAY);
 		}
+
 		g.fillRect(0, 0, 32, 32);
 		g.dispose();
 		return image;
 	}
 
+	/**
+	 * Méthode principale pour lancer l'application.
+	 * @param args Les arguments de la ligne de commande (non utilisés).
+	 */
 	public static void main(String[] args) {
 		GenerateurCarte generation = new GenerateurCarte();
 		Carte carte = generation.genererCarte(30, 30);

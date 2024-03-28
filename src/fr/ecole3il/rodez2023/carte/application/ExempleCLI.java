@@ -1,7 +1,6 @@
 package fr.ecole3il.rodez2023.carte.application;
 
 import fr.ecole3il.rodez2023.carte.AdaptateurAlgorithme;
-
 import fr.ecole3il.rodez2023.carte.chemin.algorithmes.AlgorithmeChemin;
 import fr.ecole3il.rodez2023.carte.chemin.algorithmes.AlgorithmeDjikstra;
 import fr.ecole3il.rodez2023.carte.elements.Carte;
@@ -10,14 +9,18 @@ import fr.ecole3il.rodez2023.carte.elements.Chemin;
 import fr.ecole3il.rodez2023.carte.manipulateurs.GenerateurCarte;
 
 /**
+ * Cette classe représente un exemple d'utilisation en ligne de commande (CLI) pour tester la recherche de chemin
+ * sur une carte à l'aide d'un algorithme spécifié.
+ * Elle génère une carte, exécute l'algorithme de recherche de chemin deux fois avec les mêmes paramètres,
+ * puis affiche le chemin trouvé dans la console.
  * @author p.roquart
- *genre on peut tester le code
- *c'est agaçant tous ces tests
- *
- *de toute façon quand ça compile c'est bon
  */
 public class ExempleCLI {
 
+	/**
+	 * Méthode principale pour exécuter l'exemple en ligne de commande.
+	 * @param args Les arguments de la ligne de commande (non utilisés).
+	 */
 	public static void main(String[] args) {
 		GenerateurCarte generateur = new GenerateurCarte();
 		Carte test = generateur.genererCarte(100, 100);

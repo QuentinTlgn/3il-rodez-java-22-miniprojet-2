@@ -5,9 +5,16 @@ import fr.ecole3il.rodez2023.carte.elements.Noeud;
 
 import java.util.*;
 
-
+/**
+ * Implémentation de l'algorithme de Dijkstra pour trouver le chemin le plus court entre deux nœuds dans un graphe donné.
+ *
+ * @param <E> le type des valeurs associées aux nœuds du graphe
+ */
 public class AlgorithmeDjikstra<E> implements AlgorithmeChemin<E> {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Noeud<E>> trouverChemin(Graphe<E> graphe, Noeud<E> depart, Noeud<E> arrivee) {
         Map<Noeud<E>, Double> couts = new HashMap<>();

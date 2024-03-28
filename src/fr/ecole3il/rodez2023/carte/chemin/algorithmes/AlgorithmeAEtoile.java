@@ -6,8 +6,20 @@ import fr.ecole3il.rodez2023.carte.elements.Case;
 
 import java.util.*;
 
+/**
+ * Implémentation de l'algorithme A* pour trouver un chemin optimal entre deux nœuds dans un graphe donné.
+ *
+ * @param <E> le type des valeurs associées aux nœuds du graphe
+ */
 public class AlgorithmeAEtoile<E> implements AlgorithmeChemin<E> {
 
+    /**
+     * Calcule l'heuristique entre deux nœuds.
+     *
+     * @param noeudCourant le nœud courant
+     * @param arrivee      le nœud d'arrivée
+     * @return l'heuristique entre les deux nœuds
+     */
     private double heuristique(Noeud<E> noeudCourant, Noeud<E> arrivee) {
         Case caseNoeudCourant = (Case) noeudCourant.getValeur(); // Récupération de la case associée au nœud
         Case caseArrivee = (Case) arrivee.getValeur(); // Récupération de la case associée à la cible
@@ -17,6 +29,9 @@ public class AlgorithmeAEtoile<E> implements AlgorithmeChemin<E> {
         return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Noeud<E>> trouverChemin(Graphe<E> graphe, Noeud<E> debut, Noeud<E> cible) {
 
@@ -62,13 +77,20 @@ public class AlgorithmeAEtoile<E> implements AlgorithmeChemin<E> {
         }
 
         // Reconstruction du chemin
-        LinkedList<Noeud<E>> chemin = reconstruireChemin(precedent, cible, debut);
+        LinkedList<Noeud<E>> chemin = reconstruireChemin(precedent, cible);
         Collections.reverse(chemin);
 
         return new ArrayList<>(chemin);
     }
 
-    private LinkedList<Noeud<E>> reconstruireChemin(Map<Noeud<E>, Noeud<E>> predecesseur, Noeud<E> cible, Noeud<E> debut) {
+    /**
+     * Reconstruit le chemin à partir des prédécesseurs.
+     *
+     * @param predecesseur le mapping des nœuds prédécesseurs
+     * @param cible        le nœud cible
+     * @return la liste des nœuds formant le chemin optimal
+     */
+    private LinkedList<Noeud<E>> reconstruireChemin(Map<Noeud<E>, Noeud<E>> predecesseur, Noeud<E> cible) {
         LinkedList<Noeud<E>> chemin = new LinkedList<>();
         Noeud<E> courant = cible;
 
