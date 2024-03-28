@@ -8,7 +8,7 @@ import java.util.*;
 
 public class AlgorithmeAEtoile<E> implements AlgorithmeChemin<E> {
 
-    private double estimationHeuristique(Noeud<E> noeudCourant, Noeud<E> arrivee) {
+    private double heuristique(Noeud<E> noeudCourant, Noeud<E> arrivee) {
         Case caseNoeudCourant = (Case) noeudCourant.getValeur(); // Récupération de la case associée au nœud
         Case caseArrivee = (Case) arrivee.getValeur(); // Récupération de la case associée à la cible
 
@@ -33,7 +33,7 @@ public class AlgorithmeAEtoile<E> implements AlgorithmeChemin<E> {
             precedent.put(noeud, null);
         }
         coutActuel.put(debut, 0.0);
-        coutTotalEstime.put(debut, estimationHeuristique(debut, cible));
+        coutTotalEstime.put(debut, heuristique(debut, cible));
         filePrioritaire.add(debut);
 
         // Algorithme A*
@@ -52,7 +52,7 @@ public class AlgorithmeAEtoile<E> implements AlgorithmeChemin<E> {
                 if (nouveauCout < coutActuel.get(voisin)) {
                     precedent.put(voisin, courant);
                     coutActuel.put(voisin, nouveauCout);
-                    coutTotalEstime.put(voisin, coutActuel.get(voisin) + estimationHeuristique(voisin, cible));
+                    coutTotalEstime.put(voisin, coutActuel.get(voisin) + heuristique(voisin, cible));
                     if (!filePrioritaire.contains(voisin))
                         filePrioritaire.add(voisin);
                 }
